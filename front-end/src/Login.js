@@ -1,49 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [resetPasswordRequested, setResetPasswordRequested] = useState(false);
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [resetPasswordRequested, setResetPasswordRequested] = useState(false)
 
   const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
-  };
+    setUsername(event.target.value)
+  }
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
-  };
+    setPassword(event.target.value)
+  }
 
   const handleLogin = () => {
-    let loginIdentifier = ''; 
-  
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let loginIdentifier = ''
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (username.match(emailPattern)) {
-      loginIdentifier = 'email';
+      loginIdentifier = 'email'
     } else {
-      loginIdentifier = 'username';
+      loginIdentifier = 'username'
     }
-  
+
     const loginInfo =
       loginIdentifier === 'email'
         ? `Login with email: ${username} and password: ${password}`
-        : `Login with username: ${username} and password: ${password}`;
-    
+        : `Login with username: ${username} and password: ${password}`
+
     //navigateToHomePage();
-  };
-  
+  }
 
   const handleForgotPassword = () => {
-    console.log('Sending password reset link to:', username);
-    setResetPasswordRequested(true);
-  };
+    console.log('Sending password reset link to:', username)
+    setResetPasswordRequested(true)
+  }
 
   return (
     <div style={styles.container}>
       <h2 style={styles.title}>Login</h2>
       <div style={styles.inputContainer}>
         <input
-          type="text"
-          placeholder="Username"
+          type='text'
+          placeholder='Username'
           value={username}
           onChange={handleUsernameChange}
           style={styles.input}
@@ -51,15 +51,15 @@ const Login = () => {
       </div>
       <div style={styles.inputContainer}>
         <input
-          type="password"
-          placeholder="Password"
+          type='password'
+          placeholder='Password'
           value={password}
           onChange={handlePasswordChange}
           style={styles.input}
         />
       </div>
       <button onClick={handleLogin} style={styles.button}>
-        Login
+        <Link to='/Home'>Login</Link>
       </button>
       <p style={styles.forgotPassword} onClick={handleForgotPassword}>
         Forgot Password?
@@ -73,9 +73,8 @@ const Login = () => {
         New Here? <span style={styles.signupLink}>Sign Up</span>
       </p>
     </div>
-  );
-};
-
+  )
+}
 
 const styles = {
   container: {
@@ -133,6 +132,6 @@ const styles = {
     textDecoration: 'underline',
     cursor: 'pointer',
   },
-};
+}
 
-export default Login;
+export default Login

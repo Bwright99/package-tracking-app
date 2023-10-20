@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./App.css";
-import Login from "./Login";
-import Home from "./Home";
-import Packages from "./Packages";
+import React, { useState } from 'react'
+import './App.css'
+import { Route, Routes, Link } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Account from './pages/Account'
+import Home from './pages/Home'
+import Packages from './pages/Packages'
+import YourPackage from './pages/YourPackage'
+import LoginPage from './pages/LoginPage'
 
-const App = () => {
+function App() {
   return (
-    // <div className="App">
-    //   <Login />
-    // </div>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/">
-          <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="packages" element={<Packages />} />
-          {/* The routes on the bottom are just for reference */}
-          {/* <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoPage />} /> */}
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  );
-};
+    <>
+      <Navbar />
+      <div className='container'>
+        <Routes>
+          <Route path='/' element={<LoginPage />} />
+          <Route path='/Home' element={<Home />} />
+          <Route path='/account' element={<Account />} />
+          <Route path='/packages' element={<Packages />} />
+          <Route path='/YourPackage' element={<YourPackage />} />
+        </Routes>
+      </div>
+    </>
+  )
+}
 
-export default App;
+export default App
