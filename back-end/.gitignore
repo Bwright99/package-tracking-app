@@ -2,9 +2,10 @@
 
 # dependencies
 /node_modules
-../back-end/node_modules
 /.pnp
 .pnp.js
+
+./firebase_credentials.js
 
 # testing
 /coverage
