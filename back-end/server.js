@@ -1,5 +1,7 @@
 const express = require("express")
 const app = express()
+require('dotenv').config();
+
 
 const cors = require("cors")
 const User = require("./config")
@@ -24,9 +26,9 @@ app.post("/addUser", async(req, res) => {
 
 app.post("/addShipment", async(req, res) => {
     const packageInfo = req.body;
+    await Package.add(packageInfo);
     console.log("Shipment Added")
     console.log(packageInfo);
-    await Package.add(packageInfo);
     res.send({msg:"Shipment Added"});
 })
 
