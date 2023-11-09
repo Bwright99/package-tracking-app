@@ -16,7 +16,7 @@ function App() {
           <Route path='/*' element={<Home />} />
           <Route path='/account' element={<Account />} />
           <Route path='/packages' element={<Packages />} />
-          <Route path='/YourPackage' element={<YourPackage />} />
+          <Route path='/YourPackage/:trackingInfo' element={<YourPackage />} />
         </Routes>
       </div>
     </>

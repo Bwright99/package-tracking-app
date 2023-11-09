@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-const PackageBE = () => {
+const Package = () => {
   const [backendData, setBackendData] = useState([{}]);
   const fetchData = () => {
-    fetch("http://localhost:2000/api", {
+    fetch("/api", {
       method: "GET",
     })
       .then((response) => {
@@ -34,4 +34,4 @@ const PackageBE = () => {
   );
 };
 
-export default PackageBE;
+export default Package;
