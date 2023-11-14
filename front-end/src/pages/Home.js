@@ -6,24 +6,11 @@ export default function Home() {
   const [trackingNumber, setTrackingNumber] = useState('')
   const [trackingResult, setTrackingResult] = useState(null)
 
-  //API CALLS NOT WORKING!!!
-
-  const SHIP24_API_KEY = 'apik_DsPEC260ZeGWNhFmRnTWLTXsmZQa8F'
-
-  const SHIP24_API_ENDPOINT = 'https://api.ship24.com/public/v1/trackers'
-
-  const headers = {
-    Authorization: `Bearer ${SHIP24_API_KEY}`,
-    'Content-Type': 'application/json; charset=utf-8',
-  }
-
-  const config = { headers }
-
   const trackPackage = async () => {
     try {
-      const response = await axios.get(
-        `${SHIP24_API_ENDPOINT}/${trackingNumber}`,
-        config
+      const response = await axios.post(
+        'http://localhost:2000/trackers/search/results',
+        { trackingNumber }
       )
 
       const trackingInfo = response.data
@@ -33,8 +20,6 @@ export default function Home() {
       console.error('API request error:', error)
     }
   }
-
-  //Should store tracking number fine and redirect to other page fine. I think.
 
   return (
     <div>
