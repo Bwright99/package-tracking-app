@@ -12,13 +12,14 @@ body {
 }
 
 .nav {
-  background-color: rgb(85, 0, 255);
+  background-color: rgb(95, 134, 218);
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
   gap: 2rem;
   padding: 0 1rem;
+  border-radius: 10px; /* Set the border-radius for rounded corners */
 }
 
 .site-title {
@@ -44,8 +45,10 @@ body {
 
 .nav li.active {
   background-color: rgb(85, 0, 255);
+  border-radius: 10px; /* Apply the border-radius for rounded corners on hover */
 }
 
 .nav li:hover {
   background-color: rgb(75, 0, 224);
+  border-radius: 10px; /* Apply the border-radius for rounded corners on hover */
 }

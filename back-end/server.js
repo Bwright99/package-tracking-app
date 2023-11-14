@@ -18,6 +18,33 @@ app.use(cors())
 
 const db = getFirestore(FirebaseApp)
 
+app.post('/trackers/track', async(req, res) => {
+    console.log("hit")
+    const trackingNumber = req.body.trackingNumber;
+    let url = 'https://api.ship24.com/public/v1/trackers/track';
+
+    let options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          Authorization: 'Bearer ' + process.env.SHIP24_API_KEY
+        },
+        body: JSON.stringify({
+            "trackingNumber":trackingNumber
+        })
+      };
+
+    fetch(url, options)
+        .then(res => res.json())
+        .then((json) => {
+            console.log(json)
+            res.status(200).send(json)
+        })
+        .catch((err) => {
+            console.error('error:' + err)
+        });
+})
+
 app.post('/trackers/search/results', async(req, res) => {
     const trackingNumber = req.body.trackingNumber;
     let url = `https://api.ship24.com/public/v1/trackers/search/${trackingNumber}/results`;

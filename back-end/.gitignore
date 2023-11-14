@@ -15,6 +15,7 @@ firestore_credentials.json
 /build
 
 # misc
+../.DS_Store
 .DS_Store
 .env.local
 .env.development.local
