@@ -1,7 +1,6 @@
 {
   "name": "package-tracking-app",
   "version": "0.1.0",
-  "proxy": "http://localhost:2000",
   "private": true,
   "dependencies": {
     "@easypost/api": "^6.8.2",
@@ -28,6 +27,10 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "options": {
+    "allowedHosts": ["localhost", ".localhost"],
+    "proxy": "https://localhost:3386/"
   },
   "browserslist": {
     "production": [
