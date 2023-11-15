@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const BASE_URL = 'http://localhost:2000';
-
 const api = {
   signUp: async (newUsername, newPassword) => {
     try {
@@ -16,13 +14,17 @@ const api = {
           password: newPassword,
         }),
       });
-
       if (!response.ok) {
         throw new Error('Sign Up failed');
       }
 
+      const userData = await response.json(); 
+      console.log('User signed up successfully:', userData);
+
+      return userData; 
     } catch (error) {
       console.error('Error during sign up:', error.message);
+      throw error; 
     }
   },
 
@@ -62,7 +64,10 @@ const SignUp = () => {
   };
 
   const handleSignUp = async () => {
-    await api.signUp(newUsername, newPassword);
+    try {
+      const userData = await api.signUp(newUsername, newPassword);
+    } catch (error) {
+    }
   };
 
   return (
@@ -87,7 +92,7 @@ const SignUp = () => {
         />
       </div>
       <button onClick={handleSignUp} style={styles.button}>
-        Sign Up
+      <Link to='/Home'>Sign Up</Link>
       </button>
     </div>
   );
@@ -107,7 +112,12 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
-    await api.signIn(username, password);
+    try {
+      await api.signIn(username, password);
+      console.log('User signed in successfully');
+    } catch (error) {
+      console.error('Error during sign in:', error.message);
+    }
   };
 
   const handleForgotPassword = () => {
