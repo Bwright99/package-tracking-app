@@ -53,20 +53,32 @@ const api = {
 
 const SignUp = () => {
   const [newUsername, setNewUsername] = useState('');
+  const [newEmail, setNewEmail] = useState('');
   const [newPassword, setNewPassword] = useState('');
+  const [newPhoneNumber, setNewPhoneNumber] = useState('');
 
   const handleNewUsernameChange = (event) => {
     setNewUsername(event.target.value);
+  };
+
+  const handleNewEmailChange = (event) => {
+    setNewEmail(event.target.value);
   };
 
   const handleNewPasswordChange = (event) => {
     setNewPassword(event.target.value);
   };
 
+  const handleNewPhoneNumberChange = (event) => {
+    setNewPhoneNumber(event.target.value);
+  };
+
   const handleSignUp = async () => {
     try {
-      const userData = await api.signUp(newUsername, newPassword);
+      const userData = await api.signUp(newUsername, newEmail, newPassword, newPhoneNumber);
+      console.log('User signed up successfully:', userData);
     } catch (error) {
+      console.error('Error during sign up:', error.message);
     }
   };
 
@@ -76,7 +88,7 @@ const SignUp = () => {
       <div style={styles.inputContainer}>
         <input
           type='text'
-          placeholder='New Username'
+          placeholder='Username'
           value={newUsername}
           onChange={handleNewUsernameChange}
           style={styles.input}
@@ -84,15 +96,33 @@ const SignUp = () => {
       </div>
       <div style={styles.inputContainer}>
         <input
+          type='text'
+          placeholder='Email'
+          value={newEmail}
+          onChange={handleNewEmailChange}
+          style={styles.input}
+        />
+      </div>
+      <div style={styles.inputContainer}>
+        <input
           type='password'
-          placeholder='New Password'
+          placeholder='Password'
           value={newPassword}
           onChange={handleNewPasswordChange}
           style={styles.input}
         />
       </div>
+      <div style={styles.inputContainer}>
+        <input
+          type='text'
+          placeholder='Phone Number'
+          value={newPhoneNumber}
+          onChange={handleNewPhoneNumberChange}
+          style={styles.input}
+        />
+      </div>
       <button onClick={handleSignUp} style={styles.button}>
-      <Link to='/Home'>Sign Up</Link>
+        <Link to='/Home'>Sign Up</Link>
       </button>
     </div>
   );
