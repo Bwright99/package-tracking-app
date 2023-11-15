@@ -28,7 +28,7 @@ const api = {
     }
   },
 
-  signIn: async (username, password) => {
+  signIn: async (email, password) => {
     try {
       const response = await fetch(`http://localhost:2000/signIn`, {
         method: 'POST',
@@ -36,7 +36,7 @@ const api = {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username,
+          email,
           password,
         }),
       });
@@ -129,12 +129,12 @@ const SignUp = () => {
 };
 
 const Login = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [resetPasswordRequested, setResetPasswordRequested] = useState(false);
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -143,7 +143,7 @@ const Login = () => {
 
   const handleLogin = async () => {
     try {
-      await api.signIn(username, password);
+      await api.signIn(email, password);
       console.log('User signed in successfully');
     } catch (error) {
       console.error('Error during sign in:', error.message);
@@ -151,7 +151,7 @@ const Login = () => {
   };
 
   const handleForgotPassword = () => {
-    console.log('Sending password reset link to:', username);
+    console.log('Sending password reset link to:', email);
     setResetPasswordRequested(true);
   };
 
@@ -163,9 +163,9 @@ const Login = () => {
         <div style={styles.inputContainer}>
           <input
             type='text'
-            placeholder='Username'
-            value={username}
-            onChange={handleUsernameChange}
+            placeholder='Email'
+            value={email}
+            onChange={handleEmailChange}
             style={styles.input}
           />
         </div>
@@ -186,7 +186,7 @@ const Login = () => {
         </p>
         {resetPasswordRequested && (
           <p style={styles.resetPasswordMessage}>
-            Password reset link sent to {username}'s email.
+            Password reset link sent to users email.
           </p>
         )}
       </div>
