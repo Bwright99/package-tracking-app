@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const api = {
-  signUp: async (newUsername, newPassword) => {
+  signUp: async (newUsername, newEmail, newPassword, newPhoneNumber) => {
     try {
       const response = await fetch(`http://localhost:2000/signUp`, {
         method: 'POST',
@@ -10,8 +10,10 @@ const api = {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: newUsername,
+          displayName: newUsername,
           password: newPassword,
+          email: newEmail,
+          phoneNumber: "+1"+newPhoneNumber
         }),
       });
       if (!response.ok) {
@@ -30,7 +32,7 @@ const api = {
 
   signIn: async (email, password) => {
     try {
-      const response = await fetch(`http://localhost:2000/signIn`, {
+      await fetch(`http://localhost:2000/signIn`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -39,11 +41,18 @@ const api = {
           email,
           password,
         }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Sign In failed');
-      }
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Sign In failed');
+        }
+        return response.json()
+      })
+      .then(response => {
+        console.log(response);
+        localStorage.setItem('idToken', response.idToken);
+        localStorage.setItem('refreshToken', response.refreshToken);
+      })
 
     } catch (error) {
       console.error('Error during sign in:', error.message);

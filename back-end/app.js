@@ -199,6 +199,7 @@ app.post("/signUp", async(req, res) => {
         email: req.body.email,
         password: req.body.password
     }
+    console.log(userData);
     admin.getAuth().createUser(userData)
         .then((userCredentials) => {
             console.log("A new user has signed up " + userCredentials.uid);
